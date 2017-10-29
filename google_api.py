@@ -189,7 +189,6 @@ if __name__ == '__main__':
 
         # Print stdout.
         i += 1
-        pprint("Query : " + query)
         print(Fore.RED + str(i) + " ", end='')
         print(Fore.GREEN + title_link[0])
         print("  " + Fore.CYAN + title_link[1])
