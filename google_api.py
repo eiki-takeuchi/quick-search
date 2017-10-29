@@ -95,7 +95,11 @@ class GoogleSearch():
             title and contents.
         """
 
-        html = urllib.request.urlopen(link).read()
+        try:
+            html = urllib.request.urlopen(link).read()
+        except:
+            print("ERROR : failed to get contents.")
+            return (False, "")
 
         title = Document(html).short_title()
         contents = Document(html).summary()
@@ -190,10 +194,8 @@ if __name__ == '__main__':
         print(Fore.GREEN + title_link[0])
         print("  " + Fore.CYAN + title_link[1])
 
-        try:
-            title, contents = gs.contents_scraping(title_link[1])
-        except:
-            print("Contents scraping error : " + title_link[1])
+        title, contents = gs.contents_scraping(title_link[1])
+        if title is False:
             next
 
         # print(contents[:500])
@@ -211,6 +213,10 @@ if __name__ == '__main__':
             if page_num.isdigit() is True:
                 link = title_links[int(page_num)][1]
                 title, contents = gs.contents_scraping(link, False, False)
+                if title is False:
+                    print("ERROR : failed to scrape contents.")
+                    next
+
                 for q in sys.argv[1:]:
                     contents = contents.replace(q, green(q))
 
