@@ -206,7 +206,7 @@ if __name__ == '__main__':
 
         # Temporaly stop.
         if i % 5 == 0:
-            page_num = input("Enter number of page : ")
+            page_num = input("Enter or input number of page : ")
 
             # Specify index.
             if page_num.isdigit() is True:
