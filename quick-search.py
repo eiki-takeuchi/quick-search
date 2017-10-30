@@ -15,6 +15,7 @@ import colorama
 from colorama import Fore, Back, Style
 import pydoc
 from fabric.colors import green
+import yaml
 
 colorama.init(autoreset=True)
 
@@ -165,12 +166,21 @@ class GoogleSearch():
 
 if __name__ == '__main__':
 
-    # Get args.
+    # Check args.
     args = sys.argv
-
     if len(args) == 1:
         print("Arg is not defined")
         sys.exit()
+
+    # Load params.yaml.
+    dir_path = os.path.abspath(os.path.dirname(__file__))
+    param_path = dir_path + "/params.yaml"
+
+    with open(param_path, mode="r") as f:
+        yaml_data = yaml.load(f)
+
+    QUERY_NUM = yaml_data["query_num"]
+    STOP_NUM = yaml_data["stop_num"]
 
     # Set query string.
     query = ""
@@ -181,7 +191,7 @@ if __name__ == '__main__':
             query += " " + q
 
     # Execute google search.
-    gs = GoogleSearch(20)
+    gs = GoogleSearch(QUERY_NUM)
     title_links = gs.search(query, num=20)
 
     for i, title_link in enumerate(title_links):
@@ -204,7 +214,7 @@ if __name__ == '__main__':
         print("")
 
         # Temporaly stop.
-        if i % 5 == 0:
+        if i % STOP_NUM == 0:
             page_num = input("Enter or input number of page : ")
 
             # Specify index.
