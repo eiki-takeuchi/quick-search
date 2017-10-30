@@ -24,6 +24,9 @@ $ git clone git@github.com:eitake0002/quick-search.git
 # 必要ライブラリのインストール
 $ pip install -r requirements.txt
 
+# Google API Keyのセットアップ
+$ export GOOGLE_API_KEY=[GCPのアクセスキー]
+
 # 実行
 $ python quick-search [検索ワード]
 ```
