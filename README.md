@@ -31,6 +31,10 @@ $ export GOOGLE_API_KEY=[GCPのアクセスキー]
 
 # 実行
 $ python quick-search [検索ワード]
+
+# エイリアスを設定しより簡単に実行
+$ alias q='~/quick-search/quick-search.py'
+$ q [検索ワード]
 ```
 
 # 使い方
