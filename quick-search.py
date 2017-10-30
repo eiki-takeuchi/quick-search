@@ -179,8 +179,9 @@ if __name__ == '__main__':
     with open(param_path, mode="r") as f:
         yaml_data = yaml.load(f)
 
-    QUERY_NUM = yaml_data["query_num"]
+    RESULT_NUM = yaml_data["result_num"]
     STOP_NUM = yaml_data["stop_num"]
+    SUMMARY_NUM = yaml_data["summary_num"]
 
     # Set query string.
     query = ""
@@ -191,8 +192,8 @@ if __name__ == '__main__':
             query += " " + q
 
     # Execute google search.
-    gs = GoogleSearch(QUERY_NUM)
-    title_links = gs.search(query, num=20)
+    gs = GoogleSearch()
+    title_links = gs.search(query, num=RESULT_NUM)
 
     for i, title_link in enumerate(title_links):
 
@@ -206,11 +207,10 @@ if __name__ == '__main__':
         if title is False:
             next
 
-        # print(contents[:500])
         for q in sys.argv[1:]:
             contents = contents.replace(q, green(q))
 
-        print(contents[:500])
+        print(contents[:SUMMARY_NUM])
         print("")
 
         # Temporaly stop.
