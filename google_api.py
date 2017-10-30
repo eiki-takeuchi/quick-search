@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from pprint import pprint
 from google import search
 import requests
 import urllib.request
