@@ -15,6 +15,19 @@ quick-searchは学習コストを少なくするため、可能な限りオプ�
 |python|python3.5 or later|
 |OS|CentOS6 or later|
 
+# インストール
+
+```
+# Gitからダウンロード
+$ git clone git@github.com:eitake0002/quick-search.git
+
+# 必要ライブラリのインストール
+$ pip install -r requirements.txt
+
+# 実行
+$ python quick-search [検索ワード]
+```
+
 # 使い方
 
 ```
