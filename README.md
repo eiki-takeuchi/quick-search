@@ -2,6 +2,7 @@
 
 quick-searchはGoogle検索ができるコマンドラインツールです。ターミナルから検索し、タイトルやリンク、コンテンツを一覧表示します。対話形式で実行することができ、気になったリンクには番号を入力することで辿ることができます。quick-searchはGoogle Custom Search APIを使用しているため、検索回数に比例して課金されます。
 
+![screenshot](https://gyazo.com/bfc1c55318f75366205913a674fd381a)
 
 # コンセプト
 
