@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 from google import search
 import requests
 import urllib.request
