@@ -26,6 +26,7 @@ class GoogleSearch():
         self.num = num
         self.loop_num = loop_num
         self.tmp_stop = tmp_stop
+        self.SEARCH_ENGINE_ID = os.environ["SEARCH_ENGINE_ID"]
         self.GOOGLE_API_KEY = os.environ["GOOGLE_API_KEY"]
 
     def search(self, query, start=1, num=10):
@@ -59,7 +60,7 @@ class GoogleSearch():
             start_num += 1
             api_path = "https://www.googleapis.com/customsearch/v1"
             params = {
-                "cx": "001155821352449308988:0skw1nrswlm",
+                "cx": self.SEARCH_ENGINE_ID,
                 "key": self.GOOGLE_API_KEY,
                 "q": query,
                 "start": start_num,
