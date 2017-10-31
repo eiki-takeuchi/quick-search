@@ -16,8 +16,9 @@ from fabric.colors import cyan
 import yaml
 
 
-SEARCH_ENGINE_ID=os.environ["SEARCH_ENGINE_ID"]
-GOOGLE_API_KEY=os.environ["GOOGLE_API_KEY"]
+SEARCH_ENGINE_ID = os.environ["SEARCH_ENGINE_ID"]
+GOOGLE_API_KEY = os.environ["GOOGLE_API_KEY"]
+
 
 def search(query, start=1, num=10):
     """Get title, link list.
