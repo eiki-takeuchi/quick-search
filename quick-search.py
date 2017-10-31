@@ -74,8 +74,7 @@ def search(query, start=1, num=10):
 
 
 def contents_scraping(link, remove_space=True, remove_lb=True):
-    """
-    Scraping contents.
+    """Scraping contents.
 
     Parameter
     ---------
@@ -112,8 +111,7 @@ def contents_scraping(link, remove_space=True, remove_lb=True):
 
 
 def search_images(word, num=10):
-    """
-    Get Images from google search.
+    """Get Images from google search.
 
     Ex: 
       search_images("cat", 5)
@@ -156,6 +154,30 @@ def search_images(word, num=10):
             image_links.append(v["link"])
 
     return image_links
+
+
+def open_browser(browser, link):
+    """Open link on browser.
+    Available Google Chrome or Firefox.
+
+    Parameters
+    ----------
+    browser : str
+      Browser application.
+      Ex) Firefox.app
+
+    link : str
+      Open link.
+    """
+    com = 'open -a "/Applications/{0}" {1}'.format(browser, link)
+    res_open = os.system(com)
+    if res_open != 0:
+        sys.stderr.write(
+            red("ERROR : {0} Not Found\n".format(browser)))
+
+    input_browse = input("Enter to next or 'q' is Quit : ")
+    if input_browse == 'q':
+        sys.exit()
 
 
 if __name__ == '__main__':
@@ -210,18 +232,7 @@ if __name__ == '__main__':
         if i % STOP_NUM == 0:
             page_num = input("Enter or input number of page : ")
 
-            def open_browser(browser, link):
-                com = 'open -a "/Applications/{0}" {1}'.format(browser, link)
-                res_open = os.system(com)
-                if res_open != 0:
-                    sys.stderr.write(
-                        red("ERROR : {0} Not Found\n".format(browser)))
-
-                input_browse = input("Enter to next or 'q' is Quit : ")
-                if input_browse == 'q':
-                    sys.exit()
-
-            # Browser *Only for MacOS
+            # Browser (MacOS only)
             if page_num[-1] == 'c':
                 open_browser('Google Chrome.app', title_link[1])
 
