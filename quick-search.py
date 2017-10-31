@@ -110,52 +110,6 @@ def contents_scraping(link, remove_space=True, remove_lb=True):
     return title, c
 
 
-def search_images(word, num=10):
-    """Get Images from google search.
-
-    Ex: 
-      search_images("cat", 5)
-
-    Parameter
-    ---------
-    word : str
-      Search word.
-
-    num : int
-      Number of images to get.
-
-    Return
-    ------
-    list : list
-      Image urls.
-
-    ["https://example.jpg", "https://example2.png"]
-    """
-
-    api_path = "https://www.googleapis.com/customsearch/v1"
-    params = {
-        "cx": "001155821352449308988:0skw1nrswlm",
-        "key": "AIzaSyDXu5ftNYEHOiq8wwUnSBbB4lnshkn1Syw",
-        "q": word,
-        "searchType": "image",
-        "start": 1,
-        "num": 10
-    }
-
-    try:
-        result_json = requests.get(api_path, params).json()
-        items_json = result_json["items"]
-    except:
-        pprint(result_json)
-
-    image_links = []
-    for i, v in enumerate(items_json):
-        if i < num:
-            image_links.append(v["link"])
-
-    return image_links
-
-
 def open_browser(browser, link):
     """Open link on browser.
     Available Google Chrome or Firefox.
