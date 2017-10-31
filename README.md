@@ -2,6 +2,7 @@
 
 quick-searchはGoogle検索ができるコマンドラインツールです。ターミナルから検索し、タイトルやリンク、コンテンツを一覧表示します。対話形式で実行することができ、気になったリンクには番号を入力することで辿ることができます。quick-searchはGoogle Custom Search APIを使用しているため、検索回数に比例して課金されます。
 
+<img src="https://i.gyazo.com/bfc1c55318f75366205913a674fd381a.png" width="600" style="display: block;margin-left: auto;margin-right: auto;">
 
 # コンセプト
 
@@ -34,7 +35,7 @@ $ export GOOGLE_API_KEY=[GCPのアクセスキー]
 $ python quick-search [検索ワード]
 
 # エイリアスを設定しより簡単に実行
-$ alias q='~/quick-search/quick-search.py'
+$ alias q='python ~/quick-search/quick-search.py'
 $ q [検索ワード]
 ```
 
@@ -52,11 +53,13 @@ $ ./quick-search テスト クエリ
 
 実行後は対話形式でオプションを指定することができます。デフォルトでは5つずつ検索結果が表示されます。
 
-|オプション|説明|
-|:-----------|:------------|
-|Enter| 次へ進む|
-|リンク番号|指定したリンク番号を表示する|
-|q|Quit|
+|オプション|説明|補足|
+|:-----------|:------------|:--------------|
+|Enter| 次へ進む||
+|検索結果番号|指定した検索結果番号を表示する||
+|[検索結果番号]c|指定した検索結果をChromeブラウザで表示する。（例） 1c|MacOSのみ対応|
+|[検索結果番号]b|指定した検索結果をFirefoxブラウザで表示する。 （例） 1b|MacOSのみ対応|
+|q|Quit||
 
 # 高度な設定
 
