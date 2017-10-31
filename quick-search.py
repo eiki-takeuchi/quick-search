@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 from google import search
 import requests
 import urllib.request
@@ -15,6 +13,7 @@ import colorama
 from colorama import Fore, Back, Style
 import pydoc
 from fabric.colors import green
+from fabric.colors import red
 import yaml
 
 colorama.init(autoreset=True)
@@ -218,16 +217,31 @@ if __name__ == '__main__':
         if i % STOP_NUM == 0:
             page_num = input("Enter or input number of page : ")
 
-            # Specify index.
-            if page_num.isdigit() is True:
+            def open_browser(browser, link):
+                com = 'open -a "/Applications/{0}" {1}'.format(browser, link)
+                res_open = os.system(com)
+                if res_open != 0:
+                    sys.stderr.write(
+                        red("ERROR : {0} Not Found\n".format(browser)))
+
+                input_browse = input("Enter to next or 'q' is Quit : ")
+                if input_browse == 'q':
+                    sys.exit()
+
+            # Browser *Only for MacOS
+            if page_num[-1] == 'c':
+                open_browser('Google Chrome.app', title_link[1])
+
+            elif page_num[-1] == 'b':
+                open_browser('Firefox.app', title_link[1])
+
+            # Show in terminal.
+            elif page_num.isdigit() is True:
                 link = title_links[int(page_num)][1]
                 title, contents = gs.contents_scraping(link, False, False)
                 if title is False:
                     print("ERROR : failed to scrape contents.")
                     next
-
-                for q in sys.argv[1:]:
-                    contents = contents.replace(q, green(q))
 
                 pydoc.pager(contents)
 
