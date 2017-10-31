@@ -14,7 +14,8 @@ from fabric.colors import green
 from fabric.colors import red
 from fabric.colors import cyan
 import yaml
-
+from multiprocessing import Pool
+import multiprocessing as multi
 
 SEARCH_ENGINE_ID = os.environ["SEARCH_ENGINE_ID"]
 GOOGLE_API_KEY = os.environ["GOOGLE_API_KEY"]
@@ -90,7 +91,7 @@ def contents_scraping(link, remove_space=True, remove_lb=True):
     try:
         html = urllib.request.urlopen(link).read()
     except:
-        print("ERROR : failed to get contents.")
+        print("ERROR : failed to get contents. -> " + link)
         return (False, "")
 
     title = Document(html).short_title()
@@ -152,6 +153,7 @@ if __name__ == '__main__':
     RESULT_NUM = yaml_data["result_num"]
     STOP_NUM = yaml_data["stop_num"]
     SUMMARY_NUM = yaml_data["summary_num"]
+    MULTI_PROCESS = yaml_data["multi_process"]
 
     # Set query string.
     query = ""
@@ -164,6 +166,19 @@ if __name__ == '__main__':
     # Execute google search.
     title_links = search(query, num=RESULT_NUM)
 
+    # Exec http request as multiprocess.
+    if MULTI_PROCESS is True:
+        p = Pool(multi.cpu_count())
+        link_list = [l[1] for l in title_links]
+        scraping_result = p.map(contents_scraping, link_list)
+        p.close()
+        title_links = []
+        for i, v in enumerate(scraping_result):
+            title = v[0]
+            link = link_list[i]
+            contents = v[1]
+            title_links.append([title, link, contents])
+
     for i, title_link in enumerate(title_links):
 
         # Print stdout.
@@ -172,9 +187,10 @@ if __name__ == '__main__':
         print(green(title_link[0]))
         print("  " + cyan(title_link[1]))
 
-        title, contents = contents_scraping(title_link[1])
-        if title is False:
-            next
+        if MULTI_PROCESS is False:
+            title, contents = contents_scraping(title_link[1])
+            if title is False:
+                next
 
         for q in sys.argv[1:]:
             contents = contents.replace(q, green(q))
@@ -186,8 +202,12 @@ if __name__ == '__main__':
         if i % STOP_NUM == 0:
             page_num = input("Enter or input number of page : ")
 
+            # Next
+            if page_num == "":
+                pass
+
             # Browser (MacOS only)
-            if page_num[-1] == 'c':
+            elif page_num[-1] == 'c':
                 open_browser('Google Chrome.app', title_link[1])
 
             elif page_num[-1] == 'b':
@@ -204,7 +224,6 @@ if __name__ == '__main__':
                 pydoc.pager(contents)
 
                 input_after_contents = input("Enter to next or 'q' is Quit : ")
-
                 if input_after_contents == 'q':
                     sys.exit()
 

@@ -1,3 +1,4 @@
 result_num : 20
-stop_num : 5
-summary_num : 500
+stop_num : 3
+summary_num : 300
+multi_process : False
