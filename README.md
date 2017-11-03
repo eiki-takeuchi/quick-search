@@ -2,6 +2,8 @@
 
 quick-searchはGoogle検索ができるコマンドラインツールです。ターミナルから検索し、タイトルやリンク、コンテンツを一覧表示します。対話形式で実行することができ、気になったリンクには番号を入力することで辿ることができます。quick-searchはGoogle Custom Search APIを使用しているため、検索回数に比例して課金されます。
 
+※Twitter検索もできるようになりました。
+
 <img src="https://i.gyazo.com/bfc1c55318f75366205913a674fd381a.png" width="600" style="display: block;margin-left: auto;margin-right: auto;">
 
 # コンセプト
@@ -47,6 +49,26 @@ $ ./quick-search [検索クエリ]
 
 # 例
 $ ./quick-search テスト クエリ
+```
+
+# Twitter検索のインストールと使い方
+
+Twitter検索をするにはキーの取得が必要です。以下のリンクに詳しく記載されています。
+
+Twitter REST APIの使い方  
+https://syncer.jp/Web/API/Twitter/REST_API/
+
+```
+$ export ACCESS_TOKEN=[access_token]
+$ export ACCESS_TOKEN_SECRET=[access_token_secret]
+$ export CONSUMER_KEY=[consumer_key]
+$ export CONSUMER_SECRET=[consumer_secret]
+
+$ python tweet-search.py [検索クエリ]
+
+# エイリアスを設定する場合は
+$ alias t="python ~/tweet-search.py"
+
 ```
 
 # 実行後オプション
