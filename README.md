@@ -1,61 +1,61 @@
 # quick-search
 
-quick-searchはGoogle検索ができるコマンドラインツールです。ターミナルから検索し、タイトルやリンク、コンテンツを一覧表示します。対話形式で実行することができ、気になったリンクには番号を入力することで辿ることができます。quick-searchはGoogle Custom Search APIを使用しているため、検索回数に比例して課金されます。
+quick-search is a command-line tool that allows Google Search. Search results are displayed with a title, link, and content. It provides interactive command, and the user can track with numbers. quick-search uses Google Custom API so that you will be charged in proportion to the number of searches. 
 
-※Twitter検索もできるようになりました。
+*Twitter Search is available. 
 
 <img src="https://i.gyazo.com/bfc1c55318f75366205913a674fd381a.png" width="600" style="display: block;margin-left: auto;margin-right: auto;">
 
-# コンセプト
+# Concept
 
-quick-searchは学習コストを少なくするため、可能な限りオプションやコマンド特有の使い方を省いています。「シンプル」に「見やすく」を基本設計とし、直感的に操作できるようになっています。
+quick-search eliminates options and command-specific usage as much as possible to reduce learning costs. The basic design is “simple” and “easy to see”, and can be used intuitively.
 
-# 実行環境
+# Environment
 
-現行は、以下の環境でのみ実行検証を行なっています。
+Currently, only below environemt is validated. 
 
-|ツール/OS/サービス|バージョン|
+|Tool/OS/Service|Version|
 |:-----------|:------------|
 |python|python3.5 or later|
 |OS|CentOS6 or later|
 |Google Custom Search API|https://cloud.google.com/?hl=ja|
 
-# インストール
+# Installation
 
 ```
-# Gitからダウンロード
+# Git clone.
 $ git clone git@github.com:eitake0002/quick-search.git
 
-# 必要ライブラリのインストール
+# Install libraries. 
 $ pip install -r requirements.txt
 
-# Google API Keyのセットアップ
-$ export SEARCH_ENGINE_ID=[サーチエンジンID]
-$ export GOOGLE_API_KEY=[GCPのアクセスキー]
+# Set up Google API. 
+$ export SEARCH_ENGINE_ID=[Search Engine ID]
+$ export GOOGLE_API_KEY=[GCP Access Key]
 
-# 実行
-$ python quick-search [検索ワード]
+# Execution
+$ python quick-search [Search Word]
 
-# エイリアスを設定しより簡単に実行
+# Simple execution by setting up alias. 
 $ alias q='python ~/quick-search/quick-search.py'
-$ q [検索ワード]
+$ q [Search Word]
 ```
 
-# 使い方
+# Usage
 
 ```
-# 構文
-$ ./quick-search [検索クエリ]
+# Structure
+$ ./quick-search [query]
 
-# 例
-$ ./quick-search テスト クエリ
+# Example
+$ ./quick-search test query
 ```
 
-# Twitter検索のインストールと使い方
+# Installation and usage to Twitter search. 
 
-Twitter検索をするにはキーの取得が必要です。以下のリンクに詳しく記載されています。
+Twitter search require keys. Please refer to below link. 
 
-Twitter REST APIの使い方  
+Twitter REST API Usage
 https://syncer.jp/Web/API/Twitter/REST_API/
 
 ```
@@ -64,36 +64,32 @@ $ export ACCESS_TOKEN_SECRET=[access_token_secret]
 $ export CONSUMER_KEY=[consumer_key]
 $ export CONSUMER_SECRET=[consumer_secret]
 
-$ python tweet-search.py [検索クエリ]
+$ python tweet-search.py [query]
 
-# エイリアスを設定する場合は
+# Setting up alias. 
 $ alias t="python ~/tweet-search.py"
 
 ```
 
-# 実行後オプション
+# Interactive Options
 
-実行後は対話形式でオプションを指定することができます。デフォルトでは5つずつ検索結果が表示されます。
+Interactive options are provides below. Search result will be show 5 as default. 
 
-|オプション|説明|補足|
+|Option|Description|Others|
 |:-----------|:------------|:--------------|
-|Enter| 次へ進む||
-|検索結果番号|指定した検索結果番号を表示する||
-|[検索結果番号]c|指定した検索結果をChromeブラウザで表示する。（例） 1c|MacOSのみ対応|
-|[検索結果番号]b|指定した検索結果をFirefoxブラウザで表示する。 （例） 1b|MacOSのみ対応|
+|Enter| Next ||
+|Search number result|Displaying specified number||
+|[Search number result]c|Display result with Chrome Browser. Ex. 1c|Only MacOS|
+|[Search number result]b|Display result with Firefox Brower. Ex. 1b|Only MacOS|
 |q|Quit||
 
-# 高度な設定
+# Advanced Setting
 
-params.yamlを設定することで、検索条件や動作環境をカスタマイズすることができます。
+You can customize search condition, and environment by setting up params.yaml.
 
-|パラメータ|説明|デフォルト|
+|Parameter|Description|Default|
 |:-----------|:------------|:------------|
-|result_num|検索結果数を指定します。|20|
-|stop_num|指定した回数で一旦止めます。|5|
-|summary_num|検索結果時に表示する要約の文字数を指定します.|300|
-|multi_process|検索結果をまとめて表示します。multi_processをTrueにすると初期実行は時間がかかりますが、対話形式の表示が早くなります。|False|
-
-# 開発者募集
-
-　quick-searchはオープンソースのコマンドライン検索ツールです。検索や情報収集を効率化したいという開発者を随時募集しています。開発はGithub Flowに沿って、議論しながら進めていければと思っています。また、こんな操作が欲しいといった要望がありましたらいつでもご連絡下さいませ（メールアドレスとTwitterはGithubアカウントに載せています）。
+|result_num|Specify search result. |20|
+|stop_num|Stop specified times. |5|
+|summary_num|Specify number of summary word of search result. |300|
+|multi_process|Displaying search result parallelly. |False|
